@@ -2,7 +2,7 @@ function(vcpkg_find_cuda)
     cmake_parse_arguments(PARSE_ARGV 0 vfc "" "OUT_CUDA_TOOLKIT_ROOT;OUT_CUDA_VERSION" "")
 
     if(NOT vfc_OUT_CUDA_TOOLKIT_ROOT)
-        message(FATAL_ERROR "vcpkg_find_cuda() requres an OUT_CUDA_TOOLKIT_ROOT argument")
+        message(FATAL_ERROR "vcpkg_find_cuda() requires an OUT_CUDA_TOOLKIT_ROOT argument")
     endif()
 
     set(CUDA_REQUIRED_VERSION "10.1.0")
@@ -30,7 +30,8 @@ function(vcpkg_find_cuda)
         endif()
 
         file(GLOB possible_paths "${platform_base}*")
-        set(FOUND_PATH )
+        list(PREPEND possible_paths /usr/local/cuda)
+        set(FOUND_PATH)
         foreach (p ${possible_paths})
             # Extract version number from end of string
             string(REGEX MATCH "[0-9][0-9]?\\.[0-9]$" p_version ${p})
