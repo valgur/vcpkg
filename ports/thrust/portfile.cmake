@@ -7,24 +7,24 @@ vcpkg_from_github(
 )
 
 vcpkg_cmake_configure(
-    SOURCE_PATH "${SOURCE_PATH}/cub"
+    SOURCE_PATH "${SOURCE_PATH}/thrust"
     OPTIONS
-        -DCUB_ENABLE_INSTALL_RULES=ON
-        -DCUB_ENABLE_HEADER_TESTING=OFF
-        -DCUB_ENABLE_TESTING=OFF
-        -DCUB_ENABLE_EXAMPLES=OFF
-        -DCUB_ENABLE_CPP_DIALECT_IN_NAMES=ON
+        -DTHRUST_ENABLE_HEADER_TESTING=OFF
+        -DTHRUST_ENABLE_TESTING=OFF
+        -DTHRUST_ENABLE_EXAMPLES=OFF
+        -DTHRUST_ENABLE_BENCHMARKS=OFF
+        -DTHRUST_INCLUDE_CUB_CMAKE=OFF
 )
 
 vcpkg_cmake_install()
 
-vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/cub)
+vcpkg_cmake_config_fixup(CONFIG_PATH lib/cmake/thrust)
 
-file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/include/cub/cmake"
+file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/include/thrust/cmake"
                     "${CURRENT_PACKAGES_DIR}/debug"
                     "${CURRENT_PACKAGES_DIR}/lib"
 )
 
 file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")
 
-vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/cub/LICENSE.TXT")
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/thrust/LICENSE")
