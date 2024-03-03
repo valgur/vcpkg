@@ -2037,7 +2037,7 @@
       "port-version": 0
     },
     "cub": {
-      "baseline": "2.1.0",
+      "baseline": "2.3.0",
       "port-version": 0
     },
     "cubeb": {
@@ -4234,6 +4234,10 @@
     },
     "libcuckoo": {
       "baseline": "0.3.1",
+      "port-version": 0
+    },
+    "libcudacxx": {
+      "baseline": "2.3.0",
       "port-version": 0
     },
     "libcurl-simple-https": {
@@ -8538,6 +8542,10 @@
     },
     "thrift": {
       "baseline": "0.19.0",
+      "port-version": 0
+    },
+    "thrust": {
+      "baseline": "2.3.0",
       "port-version": 0
     },
     "tidy-html5": {
