@@ -25,6 +25,7 @@
     "gflags",
     "glew",
     "glog",
+    "openmp",
     "qt5-base",
     "sqlite3",
     {

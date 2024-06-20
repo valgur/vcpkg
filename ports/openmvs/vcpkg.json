@@ -63,7 +63,10 @@
       "description": "nonfree support for openmvs"
     },
     "openmp": {
-      "description": "OpenMP support for openmvs"
+      "description": "OpenMP support for openmvs",
+      "dependencies": [
+          "openmp"
+      ]
     }
   }
 }

@@ -22,7 +22,10 @@
       ]
     },
     "openmp": {
-      "description": "Build with OpenMP"
+      "description": "Build with OpenMP",
+      "dependencies": [
+        "openmp"
+      ]
     }
   }
 }

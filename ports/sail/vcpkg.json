@@ -139,7 +139,10 @@
       ]
     },
     "openmp": {
-      "description": "Enable OpenMP support"
+      "description": "Enable OpenMP support",
+      "dependencies": [
+        "openmp"
+      ]
     },
     "pcx": {
       "description": "Enable PCX codec"

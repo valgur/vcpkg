@@ -50,7 +50,10 @@
       ]
     },
     "openmp": {
-      "description": "openmp support for openmvg"
+      "description": "openmp support for openmvg",
+      "dependencies": [
+          "openmp"
+      ]
     },
     "software": {
       "description": "build openMVG tools",

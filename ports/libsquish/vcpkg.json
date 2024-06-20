@@ -6,6 +6,7 @@
   "homepage": "https://sourceforge.net/projects/libsquish",
   "license": "MIT",
   "dependencies": [
+    "openmp",
     {
       "name": "vcpkg-cmake",
       "host": true

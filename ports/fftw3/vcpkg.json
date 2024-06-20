@@ -25,7 +25,10 @@
       "supports": "!arm"
     },
     "openmp": {
-      "description": "Builds openmp enabled lib"
+      "description": "Builds openmp enabled lib",
+      "dependencies": [
+        "openmp"
+      ]
     },
     "sse": {
       "description": "Builds part of the library with sse",

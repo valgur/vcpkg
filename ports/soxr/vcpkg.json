@@ -15,7 +15,10 @@
       "description": "Include a `libsamplerate'-like interface."
     },
     "openmp": {
-      "description": "Include OpenMP threading."
+      "description": "Include OpenMP threading.",
+      "dependencies": [
+        "openmp"
+      ]
     }
   }
 }

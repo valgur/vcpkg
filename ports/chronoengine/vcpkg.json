@@ -7,6 +7,7 @@
   "supports": "(windows & x64 & !static & !uwp) | linux | osx",
   "dependencies": [
     "eigen3",
+    "openmp",
     "tbb",
     {
       "name": "vcpkg-cmake",

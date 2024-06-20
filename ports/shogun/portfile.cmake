@@ -60,7 +60,7 @@ vcpkg_cmake_configure(
         -DCMAKE_DISABLE_FIND_PACKAGE_CCache=TRUE
         -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=TRUE
         -DCMAKE_DISABLE_FIND_PACKAGE_CURL=TRUE
-        -DCMAKE_DISABLE_FIND_PACKAGE_OpenMP=TRUE
+        -DCMAKE_REQUIRE_FIND_PACKAGE_OpenMP=TRUE
         -DINSTALL_TARGETS=shogun-static
         ${extra_opts}
 )

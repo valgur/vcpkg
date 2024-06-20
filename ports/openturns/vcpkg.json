@@ -26,6 +26,7 @@
     "mpfr",
     "muparser",
     "nlopt",
+    "openmp",
     "pagmo2",
     "pthread",
     "python3",

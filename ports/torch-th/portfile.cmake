@@ -14,7 +14,7 @@ vcpkg_from_github(
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}/lib/TH"
     OPTIONS
-        -DWITH_OPENMP=OFF
+        -DWITH_OPENMP=ON
 )
 
 vcpkg_cmake_install()

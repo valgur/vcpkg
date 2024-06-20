@@ -23,7 +23,10 @@
       ]
     },
     "openmp": {
-      "description": "Builds openmp enabled lib"
+      "description": "Builds openmp enabled lib",
+      "dependencies": [
+        "openmp"
+      ]
     }
   }
 }

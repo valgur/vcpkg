@@ -17,7 +17,10 @@
   "features": {
     "openmp": {
       "description": "Build kissfft with OpenMP support",
-      "supports": "!windows"
+      "supports": "!windows",
+      "dependencies": [
+        "openmp"
+      ]
     },
     "tools": {
       "description": "Build kissfft tools",

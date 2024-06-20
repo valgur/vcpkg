@@ -50,7 +50,10 @@
       ]
     },
     "omp": {
-      "description": "Enable OpenMP backend"
+      "description": "Enable OpenMP backend",
+      "dependencies": [
+        "openmp"
+      ]
     },
     "opencl": {
       "description": "Enable OpenCL backend",

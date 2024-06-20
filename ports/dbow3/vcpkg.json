@@ -13,6 +13,7 @@
         "contrib"
       ]
     },
+    "openmp",
     {
       "name": "vcpkg-cmake",
       "host": true

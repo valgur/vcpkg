@@ -11,6 +11,7 @@
       "name": "libusb",
       "platform": "!windows"
     },
+    "openmp",
     {
       "name": "vcpkg-cmake",
       "host": true

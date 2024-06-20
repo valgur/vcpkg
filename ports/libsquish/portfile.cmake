@@ -19,7 +19,7 @@ vcpkg_cmake_configure(
     DISABLE_PARALLEL_CONFIGURE
     OPTIONS
         ${FEATURE_OPTIONS}
-        -DBUILD_SQUISH_WITH_OPENMP=OFF
+        -DBUILD_SQUISH_WITH_OPENMP=ON
 )
 
 vcpkg_cmake_install()

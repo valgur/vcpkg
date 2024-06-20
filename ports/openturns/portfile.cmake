@@ -24,7 +24,7 @@ vcpkg_cmake_configure(
       -DBUILD_PYTHON:BOOL=OFF # Requires additional python modules
       -DUSE_BOOST:BOOL=ON # Required to make the distributions cross platform
       -DUSE_DOXYGEN:BOOL=OFF
-      -DUSE_OPENMP:BOOL=OFF
+      -DUSE_OPENMP:BOOL=ON
       -DCMAKE_REQUIRE_FIND_PACKAGE_Spectra:BOOL=ON
       -DCMAKE_REQUIRE_FIND_PACKAGE_Eigen3:BOOL=ON
       -DCMAKE_DISABLE_FIND_PACKAGE_primesieve:BOOL=ON

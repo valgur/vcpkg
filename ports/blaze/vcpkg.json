@@ -28,7 +28,10 @@
       ]
     },
     "openmp": {
-      "description": "OpenMP support"
+      "description": "OpenMP support",
+      "dependencies": [
+        "openmp"
+      ]
     }
   }
 }

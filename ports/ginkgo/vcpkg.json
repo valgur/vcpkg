@@ -30,7 +30,10 @@
     },
     "openmp": {
       "description": "Build the OpenMP backend of Ginkgo",
-      "supports": "mingw | !windows"
+      "supports": "mingw | !windows",
+      "dependencies": [
+        "openmp"
+      ]
     }
   }
 }

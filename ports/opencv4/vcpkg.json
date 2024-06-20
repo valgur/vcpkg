@@ -247,7 +247,10 @@
       ]
     },
     "openmp": {
-      "description": "Enable openmp support for opencv"
+      "description": "Enable openmp support for opencv",
+      "dependencies": [
+        "openmp"
+      ]
     },
     "openvino": {
       "description": "OpenVINO support for OpenCV DNN",

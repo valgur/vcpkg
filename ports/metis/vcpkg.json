@@ -6,6 +6,7 @@
   "license": "Apache-2.0",
   "dependencies": [
     "gklib",
+    "openmp",
     {
       "name": "vcpkg-cmake",
       "host": true

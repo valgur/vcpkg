@@ -44,7 +44,10 @@
       ]
     },
     "openmp": {
-      "description": "Build with OpenMP support for multi-threaded code."
+      "description": "Build with OpenMP support for multi-threaded code.",
+      "dependencies": [
+        "openmp"
+      ]
     },
     "tools": {
       "description": "Generates an executable inside the tools folder.",

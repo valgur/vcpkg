@@ -20,6 +20,7 @@
     "libxml2",
     "lzo",
     "nlopt",
+    "openmp",
     "protobuf",
     "rxcpp",
     "snappy",

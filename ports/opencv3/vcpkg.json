@@ -205,7 +205,10 @@
       ]
     },
     "openmp": {
-      "description": "Enable openmp support for opencv"
+      "description": "Enable openmp support for opencv",
+      "dependencies": [
+        "openmp"
+      ]
     },
     "ovis": {
       "description": "opencv_ovis module",

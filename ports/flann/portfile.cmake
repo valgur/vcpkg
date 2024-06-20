@@ -16,6 +16,7 @@ vcpkg_check_features(OUT_FEATURE_OPTIONS FEATURE_OPTIONS
     FEATURES
         hdf5    WITH_HDF5
         cuda    BUILD_CUDA_LIB
+        openmp  USE_OPENMP
 )
 
 vcpkg_cmake_configure(
@@ -27,7 +28,6 @@ vcpkg_cmake_configure(
         -DBUILD_DOC=OFF
         -DBUILD_PYTHON_BINDINGS=OFF
         -DBUILD_MATLAB_BINDINGS=OFF
-        -DUSE_OPENMP=OFF
     OPTIONS_DEBUG 
         -DCMAKE_DEBUG_POSTFIX=d
 )

@@ -28,6 +28,12 @@
       "dependencies": [
         "hdf5"
       ]
-    }
+    },
+    "openmp": {
+      "description": "Build with OpenMP",
+      "dependencies": [
+        "openmp"
+      ]
+    },
   }
 }

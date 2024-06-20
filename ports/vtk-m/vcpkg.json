@@ -32,7 +32,10 @@
       ]
     },
     "omp": {
-      "description": "Use the OpenMP device adapter."
+      "description": "Use the OpenMP device adapter.",
+      "dependencies": [
+        "openmp"
+      ]
     },
     "tbb": {
       "description": "Use the Intel TBB device adapter.",
