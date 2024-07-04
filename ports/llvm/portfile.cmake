@@ -10,7 +10,6 @@ vcpkg_from_github(
         0001-fix-install-package-dir.patch
         0002-fix-tools-install-dir.patch
         0003-fix-llvm-config.patch
-        0004-disable-libomp-aliases.patch
         0005-remove-numpy.patch
         0006-create-destination-mlir-directory.patch
         75711.patch # [clang] Add intrin0.h header to mimic intrin0.h used by MSVC STL for clang-cl #75711
@@ -156,17 +155,6 @@ if("mlir" IN_LIST FEATURES)
             "-Dpybind11_DIR=${CURRENT_INSTALLED_DIR}/share/pybind11"
         )
     endif()
-endif()
-if("openmp" IN_LIST FEATURES)
-    list(APPEND LLVM_ENABLE_PROJECTS "openmp")
-    # Perl is required for the OpenMP run-time
-    vcpkg_find_acquire_program(PERL)
-    list(APPEND FEATURE_OPTIONS
-        -DLIBOMP_INSTALL_ALIASES=OFF
-        -DOPENMP_ENABLE_LIBOMPTARGET=OFF # Currently libomptarget cannot be compiled on Windows or MacOS X.
-        -DOPENMP_ENABLE_OMPT_TOOLS=OFF # Currently tools are not tested well on Windows or MacOS X.
-        -DPERL_EXECUTABLE=${PERL}
-    )
 endif()
 if("polly" IN_LIST FEATURES)
     list(APPEND LLVM_ENABLE_PROJECTS "polly")
@@ -329,6 +317,20 @@ llvm_cmake_package_config_fixup("llvm")
 if("mlir" IN_LIST FEATURES)
     vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/share/mlir/MLIRConfig.cmake" "set(MLIR_MAIN_SRC_DIR \"${SOURCE_PATH}/mlir\")" "")
     vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/share/mlir/MLIRConfig.cmake" "${CURRENT_BUILDTREES_DIR}" "\${MLIR_INCLUDE_DIRS}")
+endif()
+
+if("openmp" IN_LIST FEATURES)
+    # The openmp component only exports an 'omp' target, for both release and debug.
+    # Get it from the llvm-openmp package.
+    vcpkg_replace_string("${CURRENT_PACKAGES_DIR}/share/llvm/LLVMExports.cmake"
+        "# Load information for each installed configuration."
+        "# Load information for each installed configuration.\ninclude(\"${_IMPORT_PREFIX}/share/unofficial-llvm-openmp/unofficial-llvm-openmp-config.cmake\")"
+    )
+    # Copy omp.h and ompx.h to tools/llvm/lib/clang/18/include/omp.h
+    string(REGEX MATCH "^[0-9]+" LLVM_VERSION_MAJOR ${VERSION})
+    set(OPENMP_INCLUDE_DIR "${CURRENT_PACKAGES_DIR}/include/unofficial-llvm-openmp")
+    file(COPY "${OPENMP_INCLUDE_DIR}/omp.h" "${OPENMP_INCLUDE_DIR}/ompx.h"
+        DESTINATION "${CURRENT_PACKAGES_DIR}/tools/llvm/lib/clang/${LLVM_VERSION_MAJOR}/include")
 endif()
 
 vcpkg_copy_tool_dependencies("${CURRENT_PACKAGES_DIR}/tools/${PORT}")
