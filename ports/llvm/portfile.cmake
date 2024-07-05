@@ -328,7 +328,7 @@ if("openmp" IN_LIST FEATURES)
     )
     # Copy omp.h and ompx.h to tools/llvm/lib/clang/18/include/omp.h
     string(REGEX MATCH "^[0-9]+" LLVM_VERSION_MAJOR ${VERSION})
-    set(OPENMP_INCLUDE_DIR "${CURRENT_PACKAGES_DIR}/include/unofficial-llvm-openmp")
+    set(OPENMP_INCLUDE_DIR "${CURRENT_INSTALLED_DIR}/include/unofficial-llvm-openmp")
     file(COPY "${OPENMP_INCLUDE_DIR}/omp.h" "${OPENMP_INCLUDE_DIR}/ompx.h"
         DESTINATION "${CURRENT_PACKAGES_DIR}/tools/llvm/lib/clang/${LLVM_VERSION_MAJOR}/include")
 endif()
