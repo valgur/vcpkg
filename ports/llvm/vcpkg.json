@@ -309,8 +309,7 @@
             "clang",
             "utils"
           ]
-        },
-        "llvm-openmp"
+        }
       ]
     },
     "polly": {
