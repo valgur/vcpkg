@@ -2,36 +2,24 @@ diff --git a/cmake/CeresConfig.cmake.in b/cmake/CeresConfig.cmake.in
 index 4745483..b55462d 100644
 --- a/cmake/CeresConfig.cmake.in
 +++ b/cmake/CeresConfig.cmake.in
-@@ -179,8 +179,14 @@
- find_dependency(Threads)
- 
+@@ -178,7 +178,12 @@
+ include(CMakeFindDependencyMacro)
  # Optional dependencies
--@CXSparse_DEPENDENCY@
+ @METIS_DEPENDENCY@
 -@SuiteSparse_DEPENDENCY@
 +include (CMakeFindDependencyMacro)
-+if (@CXSPARSE@)
-+    find_dependency(CXSparse REQUIRED)
-+endif()
 +if (@SUITESPARSE@)
-+    find_dependency(CHOLMOD REQUIRED)
-+    find_dependency(SPQR REQUIRED)
++  find_dependency(CHOLMOD REQUIRED)
++  find_dependency(SPQR REQUIRED)
++  add_library(SuiteSparse::Partition ALIAS SuiteSparse::CHOLMOD)
 +endif()
- 
- # As imported CMake targets are not re-exported when a dependent target is
- # exported, we must invoke find_package(XXX) here to reload the definition
-@@ -217,55 +223,7 @@
- endif (Eigen3_FOUND)
- 
- # glog (and maybe gflags).
--#
--# Flags set during configuration and build of Ceres.
--set(CERES_USES_MINIGLOG @MINIGLOG@)
--set(CERES_GLOG_VERSION @glog_VERSION@)
--set(CERES_GLOG_WAS_BUILT_WITH_CMAKE @FOUND_INSTALLED_GLOG_CMAKE_CONFIGURATION@)
--
--set(CERES_USES_GFLAGS @GFLAGS@)
--set(CERES_GFLAGS_VERSION @gflags_VERSION@)
--
+ @CUDAToolkit_DEPENDENCY@
+ @Threads_DEPENDENCY@
+
+@@ -226,46 +231,7 @@
+ set(CERES_USES_GFLAGS @GFLAGS@)
+ set(CERES_GFLAGS_VERSION @gflags_VERSION@)
+
 -if (CERES_USES_MINIGLOG)
 -  # Output message at standard log level (not the lower STATUS) so that
 -  # the message is output in GUI during configuration to warn user.

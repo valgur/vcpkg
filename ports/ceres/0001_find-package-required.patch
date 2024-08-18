@@ -1,0 +1,121 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -211,7 +211,7 @@
+     # elsewhere, emulate the effects of FindCUDAToolkit locally in terms of the
+     # expected CMake imported targets and defined variables. This can be removed
+     # from as soon as the min CMake version is >= 3.17.
+-    find_package(CUDA QUIET)
++    find_package(CUDA REQUIRED)
+     if (CUDA_FOUND)
+       message("-- Found CUDA version ${CUDA_VERSION} installed in: "
+         "${CUDA_TOOLKIT_ROOT_DIR} via legacy (< 3.17) CMake module. "
+@@ -240,7 +240,7 @@
+       update_cache_variable(USE_CUDA OFF)
+     endif (CUDA_FOUND)
+   else (CMAKE_VERSION VERSION_LESS 3.17)
+-    find_package(CUDAToolkit QUIET)
++    find_package(CUDAToolkit REQUIRED)
+     if (CUDAToolkit_FOUND)
+       message("-- Found CUDA version ${CUDAToolkit_VERSION} installed in: "
+         "${CUDAToolkit_TARGET_DIR}")
+@@ -270,7 +270,7 @@
+ endif (NOT USE_CUDA)
+ 
+ if (LAPACK)
+-  find_package(LAPACK QUIET)
++  find_package(LAPACK REQUIRED)
+   if (LAPACK_FOUND)
+     message("-- Found LAPACK library: ${LAPACK_LIBRARIES}")
+   else (LAPACK_FOUND)
+@@ -292,8 +292,8 @@
+   # built with SuiteSparse support.
+-
+-  # Check for SuiteSparse and dependencies.
+-  find_package(SuiteSparse 4.5.6 COMPONENTS CHOLMOD SPQR
+-    OPTIONAL_COMPONENTS Partition)
++  find_package(CHOLMOD REQUIRED CONFIG)
++  find_package(SPQR REQUIRED CONFIG)
++  add_library(SuiteSparse::Partition ALIAS SuiteSparse::CHOLMOD)
++  set(SuiteSparse_FOUND TRUE)
+   if (SuiteSparse_FOUND)
+     set(SuiteSparse_DEPENDENCY "find_dependency(SuiteSparse ${SuiteSparse_VERSION})")
+     # By default, if all of SuiteSparse's dependencies are found, Ceres is
+@@ -323,7 +323,7 @@
+ endif (NOT SuiteSparse_Partition_FOUND)
+ 
+ if (EIGENMETIS)
+-  find_package (METIS)
++  find_package (METIS REQUIRED CONFIG)
+   if (METIS_FOUND)
+     # Since METIS is a private dependency of Ceres, it requires access to the
+     # link-only METIS::METIS target to avoid undefined linker errors in projects
+@@ -346,7 +346,7 @@
+ endif (EIGENMETIS)
+ 
+ if (ACCELERATESPARSE)
+-  find_package(AccelerateSparse)
++  find_package(AccelerateSparse REQUIRED)
+   if (AccelerateSparse_FOUND)
+     message("-- Found Apple's Accelerate framework with sparse solvers, "
+       "building with Accelerate sparse support.")
+@@ -395,7 +395,7 @@
+ # GFlags.
+ if (GFLAGS)
+   # Don't search with REQUIRED as we can continue without gflags.
+-  find_package(gflags 2.2.0)
++  find_package(gflags 2.2.0 REQUIRED)
+   if (gflags_FOUND)
+     if (TARGET gflags)
+       message("-- Found Google Flags (gflags) version ${gflags_VERSION}: ${gflags_DIR}")
+@@ -433,13 +433,14 @@ else (MINIGLOG)
+   unset(MINIGLOG_MAX_LOG_LEVEL CACHE)
+   # Don't search with REQUIRED so that configuration continues if not found and
+   # we can output an error messages explaining MINIGLOG option.
+-  find_package(Glog)
+-  if (NOT GLOG_FOUND)
++  find_package(glog REQUIRED CONFIG)
++  if (0)
+     message(FATAL_ERROR "Can't find Google Log (glog). Please set either: "
+       "glog_DIR (newer CMake built versions of glog) or GLOG_INCLUDE_DIR & "
+       "GLOG_LIBRARY or enable MINIGLOG option to use minimal glog "
+       "implementation.")
+-  endif(NOT GLOG_FOUND)
++  endif()
++  if(0)
+   # By default, assume gflags was found, updating the message if it was not.
+   set(GLOG_GFLAGS_DEPENDENCY_MESSAGE
+     " Assuming glog was built with gflags support as gflags was found. "
+@@ -452,7 +453,8 @@ else (MINIGLOG)
+       "Otherwise, Ceres may fail to link due to missing gflags symbols.")
+   endif(NOT gflags_FOUND)
+   message("-- Found Google Log (glog)." ${GLOG_GFLAGS_DEPENDENCY_MESSAGE})
+-endif (MINIGLOG)
++  endif()
++endif ()
+ 
+ if (NOT SCHUR_SPECIALIZATIONS)
+   list(APPEND CERES_COMPILE_OPTIONS CERES_RESTRICT_SCHUR_SPECIALIZATION)
+--- a/internal/ceres/CMakeLists.txt
++++ b/internal/ceres/CMakeLists.txt
+@@ -85,9 +85,9 @@ endif (SCHUR_SPECIALIZATIONS)
+ set_source_files_properties(${CERES_INTERNAL_SCHUR_FILES} PROPERTIES
+   SKIP_UNITY_BUILD_INCLUSION ON)
+ 
+-if (NOT MINIGLOG AND GLOG_FOUND)
+-  list(APPEND CERES_LIBRARY_PUBLIC_DEPENDENCIES ${GLOG_LIBRARIES})
+-  if (gflags_FOUND)
++if (NOT MINIGLOG)
++  list(APPEND CERES_LIBRARY_PUBLIC_DEPENDENCIES glog::glog)
++  if (0)
+     # If glog & gflags are both found, we assume that glog was built with
+     # gflags, as it is awkward to perform a try_compile() to verify this
+     # when gflags is an imported target (as it is in newer versions).
+@@ -95,7 +95,7 @@ if (NOT MINIGLOG AND GLOG_FOUND)
+     # gflags, it is thus a public dependency for Ceres in this case.
+     list(APPEND CERES_LIBRARY_PUBLIC_DEPENDENCIES gflags)
+   endif()
+-endif (NOT MINIGLOG AND GLOG_FOUND)
++endif ()
+ 
+ if (SUITESPARSE AND SuiteSparse_FOUND)
+   # Define version information for use in Solver::FullReport.
